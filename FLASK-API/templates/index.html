@@ -6,13 +6,22 @@
     <title>Hotel Search</title>
 </head>
 <body>
-    Hi there! {{ name }}
+    <form action="{{ url_for('index') }}" method="POST">
+        <input type="text" name="search_location" placeholder="Enter Location to Search"/>
+        <button type="submit">Search</button>
+    </form>
+
+    <p>{{ message }}</p>
+
+    {% if message %}
+    <p>Found {{ hotels|count }} results</p>
+    {% endif %}
 
     <ul>
-        {% for city in cities%}
-        <li>{{ city }}</li>
+        {% for hotel in hotels %}
+            <li>{{ hotel['name'] }}</li>
         {% endfor %}
     </ul>
-
+    
 </body>
 </html>
