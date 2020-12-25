@@ -1,8 +1,8 @@
 from flask import Flask, render_template, request
 from selenium import webdriver
 
-import json
-import requests
+import json #this is part of the standard library
+import requests #this is not part of the standard library and needs to be pip installed
 
 app = Flask(__name__)
 
@@ -10,15 +10,27 @@ app = Flask(__name__)
 def about():
     return 'Hello: User'
 
-@app.route('/') #<- index route
+@app.route('/', methods=['GET', 'POST']) # default is GET only
 def index():
     '''
-    This function renders index.html with some pre-defined data
+    This function renders index.html with the json data returned from scrape_bookings
     '''
-    return render_template('index.html', name='User', cities=['Mississauga','Brampton','Toronto'])
+    if request.method == 'GET':        
+        return render_template("index.html", hotels=[])
+    else:    
+        # POST
+        loc = request.form['search_location']           
+        if not loc:
+            message = 'You have to type in a search location'
+            return render_template("index.html", hotels=[], message=message)
+        else:
+            print(loc)
+            response = requests.get(url="http://127.0.0.1:5000/api/" + loc)
+            results = response.json()
+            return render_template("index.html", hotels=results, message='You searched for: '+loc)
 
-@app.route('/api')
-def scrape_booking():
+@app.route('/api/<location>')
+def scrape_booking(location):
     '''
     This function scrapes bookings.com and returns a json list of hotel names
     '''
@@ -31,7 +43,7 @@ def scrape_booking():
 
     # type in location
     search_input_el = browser.find_element_by_name('ss')
-    search_input_el.send_keys('Mississauga')
+    search_input_el.send_keys(location)
 
     # click search button
     search_btn_el = browser.find_element_by_css_selector('button.sb-searchbox__button')
