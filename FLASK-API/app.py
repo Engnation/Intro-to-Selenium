@@ -49,13 +49,19 @@ def scrape_booking(location):
     search_btn_el = browser.find_element_by_css_selector('button.sb-searchbox__button')
     search_btn_el.click()  
 
+    import time 
+    time.sleep(3)
+
     # read results
     list = []
-    result_els = browser.find_elements_by_css_selector('div.sr_item')
-    for result in result_els:    
-        name_el = result.find_element_by_class_name('sr-hotel__name')
+    result_names = browser.find_elements_by_css_selector('div.sr_item')
+    result_imgs = browser.find_elements_by_css_selector('img.hotel_image')
+    photo_links = browser.find_elements_by_css_selector('a.sr_item_photo_link')
+    for n, i, p in zip(result_names, result_imgs, photo_links):
+        name_el = n.find_element_by_class_name('sr-hotel__name')
         hotel_obj = {}
         hotel_obj['name'] = name_el.text
+        hotel_obj['image'] = {"img": i.get_attribute("src"), 'link': p.get_attribute('href')}
         list.append(hotel_obj)
         
     # close Chrome session
