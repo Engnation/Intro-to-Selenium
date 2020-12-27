@@ -1,20 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!--external css not working, inline css currently applied-->
+<link rel="stylesheet" href="style.css">
+
+<style>
+srch {
+    width: 100px;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+body {
+    background-color: rgb(36, 143, 179);
+  }
+
+.buttonHolder{
+    text-align: center;
+}
+
+</style>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous"> 
+<!--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">-->
     <title>Hotel Search</title>
 </head>
 <body>
 
-
 <form action="{{ url_for('index') }}" method="POST">
-	<label class='form-label'>Search Hotel Locations</label>
+	<h1 class='form-label'>Search Hotel Locations!</h1>
         <input type="text" name="search_location"class='form-control' placeholder="Enter Location to Search"/>
-        <button type="submit" class='butn btn-success'>Search</button>
+        <!--wrapped search button in div to center it-->
+        <div class ="buttonHolder">
+            <button type="submit" id="btn_i" class='butn btn-success'>Search!</button>
+        </div>
+
  <div class="form-text">
-  Your location must be more than 0 characters long, contain letters and numbers, and must not contain special characters, or emoji.
+    <br><br>Your location must be more than 0 characters long, contain letters and numbers, and must not contain special characters, or emoji.
 </div>
 
     <p>{{ message }}</p>
