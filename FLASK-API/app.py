@@ -9,6 +9,8 @@ app = Flask(__name__)
 @app.route('/about') # <-this is a decorator, whenever you call the /about route, the about() function gets called.
 def about():
     return 'Hello: User'
+    
+target = "transfer.html"
 
 @app.route('/', methods=['GET', 'POST']) # default is GET only
 def index():
@@ -16,18 +18,18 @@ def index():
     This function renders index.html with the json data returned from scrape_bookings
     '''
     if request.method == 'GET':        
-        return render_template("index.html", hotels=[])
+        return render_template(target, hotels=[])
     else:    
         # POST
         loc = request.form['search_location']           
         if not loc:
             message = 'You have to type in a search location'
-            return render_template("index.html", hotels=[], message=message)
+            return render_template(target, hotels=[], message=message)
         else:
             print(loc)
             response = requests.get(url="http://127.0.0.1:5000/api/" + loc)
             results = response.json()
-            return render_template("index.html", hotels=results, message='You searched for: '+loc)
+            return render_template(target, hotels=results, message='You searched for: '+loc)
 
 @app.route('/api/<location>')
 def scrape_booking(location):
@@ -59,9 +61,11 @@ def scrape_booking(location):
     photo_links = browser.find_elements_by_css_selector('a.sr_item_photo_link')
     for n, i, p in zip(result_names, result_imgs, photo_links):
         name_el = n.find_element_by_class_name('sr-hotel__name')
+        desc_el = n.find_element_by_class_name('hotel_desc') 
         hotel_obj = {}
         hotel_obj['name'] = name_el.text
         hotel_obj['image'] = {"img": i.get_attribute("src"), 'link': p.get_attribute('href')}
+        hotel_obj['details'] = desc_el.text
         list.append(hotel_obj)
         
     # close Chrome session
