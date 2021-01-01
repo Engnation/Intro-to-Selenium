@@ -9,6 +9,8 @@ app = Flask(__name__)
 @app.route('/about') # <-this is a decorator, whenever you call the /about route, the about() function gets called.
 def about():
     return 'Hello: User'
+    
+target = "transfer.html"
 
 @app.route('/', methods=['GET', 'POST']) # default is GET only
 def index():
@@ -16,18 +18,18 @@ def index():
     This function renders index.html with the json data returned from scrape_bookings
     '''
     if request.method == 'GET':        
-        return render_template("index.html", hotels=[])
+        return render_template(target, hotels=[])
     else:    
         # POST
         loc = request.form['search_location']           
         if not loc:
             message = 'You have to type in a search location'
-            return render_template("index.html", hotels=[], message=message)
+            return render_template(target, hotels=[], message=message)
         else:
             print(loc)
             response = requests.get(url="http://127.0.0.1:5000/api/" + loc)
             results = response.json()
-            return render_template("transfer.html", hotels=results, message='You searched for: '+loc)
+            return render_template(target, hotels=results, message='You searched for: '+loc)
 
 @app.route('/api/<location>')
 def scrape_booking(location):
