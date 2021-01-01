@@ -59,7 +59,8 @@ def scrape_booking(location):
     result_names = browser.find_elements_by_css_selector('div.sr_item')
     result_imgs = browser.find_elements_by_css_selector('img.hotel_image')
     photo_links = browser.find_elements_by_css_selector('a.sr_item_photo_link')
-    for n, i, p in zip(result_names, result_imgs, photo_links):
+    #hotel_description = browser.find_elements_by_css_selector('hotel_desc')
+    for n, i, p, in zip(result_names, result_imgs, photo_links):
         name_el = n.find_element_by_class_name('sr-hotel__name')
         desc_el = n.find_element_by_class_name('hotel_desc') 
         hotel_obj = {}
