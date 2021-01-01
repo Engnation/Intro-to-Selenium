@@ -11,15 +11,15 @@
   <title>Landing Page - Start Bootstrap Theme</title>
 
   <!-- Bootstrap core CSS -->
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Custom fonts for this template -->
-  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
-  <link href="vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css">
+  <link href="../static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="../static/vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
 
   <!-- Custom styles for this template -->
-  <link href="css/landing-page.min.css" rel="stylesheet">
+  <link href="../static/css/landing-page.min.css" rel="stylesheet">
 
 </head>
 
@@ -97,11 +97,13 @@
     <div class="container-fluid p-0">
       {% for hotel in hotels %}
       <div class="row no-gutters">
-	  <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: {{ hotel['image']['img'] }}"></div>
           <div class="col-lg-6 order-lg-1 my-auto showcase-text">
 		<h2>{{ hotel['name'] }}</h2>
 		<p class="lead mb-0">{{ hotel['details'] }}</p>
           </div>
+	  <div class="col-lg-6 order-lg-2 text-white showcase-img">
+		  <img src="{{ hotel['image']['img']}}" class="rounded figure-img img-fluid rounded" alt="hotel-image"></a>
+	  </div>
       </div>
     </div>
       {% endfor %}
@@ -114,21 +116,21 @@
       <div class="row">
         <div class="col-lg-4">
           <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-            <img class="img-fluid rounded-circle mb-3" src="img/testimonials-1.jpg" alt="">
+            <img class="img-fluid rounded-circle mb-3" src="../static/img/testimonials-1.jpg" alt="">
             <h5>Margaret E.</h5>
             <p class="font-weight-light mb-0">"This is fantastic! Thanks so much guys!"</p>
           </div>
         </div>
         <div class="col-lg-4">
           <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-            <img class="img-fluid rounded-circle mb-3" src="img/testimonials-2.jpg" alt="">
+            <img class="img-fluid rounded-circle mb-3" src="../static/img/testimonials-2.jpg" alt="">
             <h5>Fred S.</h5>
             <p class="font-weight-light mb-0">"Bootstrap is amazing. I've been using it to create lots of super nice landing pages."</p>
           </div>
         </div>
         <div class="col-lg-4">
           <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-            <img class="img-fluid rounded-circle mb-3" src="img/testimonials-3.jpg" alt="">
+            <img class="img-fluid rounded-circle mb-3" src="../static/img/testimonials-3.jpg" alt="">
             <h5>Sarah W.</h5>
             <p class="font-weight-light mb-0">"Thanks so much for making these free resources available to us!"</p>
           </div>
@@ -209,8 +211,8 @@
   </footer>
 
   <!-- Bootstrap core JavaScript -->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../static/vendor/jquery/jquery.min.js"></script>
+  <script src="../static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 </body>
 
