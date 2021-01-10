@@ -98,12 +98,13 @@
       {% for hotel in hotels %}
       <div class="row no-gutters">
           <div class="col-lg-6 order-lg-1 my-auto showcase-text">
-		<h2>{{ hotel['name'] }}</h2>
-		<p class="lead mb-0">{{ hotel['details'] }}</p>
+		        <h2>{{ hotel['name'] }}</h2>
+            <p class="lead mb-0">{{ hotel['details'] }}</p>
+            <div class="col-lg-6 order-lg-2 text-white showcase-img">
+              <img src="{{ hotel['image']['img']}}" class="rounded figure-img img-fluid rounded" alt="hotel-image"></a>
+            </div>
           </div>
-	  <div class="col-lg-6 order-lg-2 text-white showcase-img">
-		  <img src="{{ hotel['image']['img']}}" class="rounded figure-img img-fluid rounded" alt="hotel-image"></a>
-	  </div>
+	        
       </div>
     </div>
       {% endfor %}

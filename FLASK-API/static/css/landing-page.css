@@ -55,14 +55,19 @@ header.masthead h1 {
   padding: 3rem;
 }
 
-.showcase .showcase-img {
-  min-height: 30rem;
-  background-size: cover;
+.showcase .showcase-img{
+  text-align: left;
+  float: left;
+  padding: 7rem
+  min-height: 20rem;
+  max-height: 10px;
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
 @media (min-width: 768px) {
   .showcase .showcase-text {
-    padding: 7rem;
+    padding: 20rem;
   }
 }
 
